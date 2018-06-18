@@ -17,9 +17,11 @@ Version isn't mandatory, although we'll make sure that all sqls have a small com
 The more the comments, the better.
 
 
+
 ## Searching
 
-Config file attached for using with https://github.com/etsy/hound
+Config file attached for using with [Hound](https://github.com/etsy/hound). Easiest way to get this working is via Docker:
+
 
 ```bash
 docker run -d -p 6080:6080 --name hound -v $(pwd):/data etsy/hound
@@ -34,12 +36,14 @@ export CSEARCHINDEX=$HOME/ongres/pgQueriesCollection/index
 ./csearch <expression>
 ```
 
+Requires build, but otherwise works like a charm.
+
 
 ## References and other repositories
 
-https://github.com/NikolayS/postgres_dba/tree/master/sql
-https://github.com/ioguix/pgsql-bloat-estimation/tree/master/table
-https://wiki.postgresql.org/wiki/Show_database_bloat
+- https://github.com/NikolayS/postgres_dba/tree/master/sql
+- https://github.com/ioguix/pgsql-bloat-estimation/tree/master/table
+- https://wiki.postgresql.org/wiki/Show_database_bloat
 
 
 
