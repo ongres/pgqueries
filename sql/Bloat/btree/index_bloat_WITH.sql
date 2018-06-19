@@ -1,4 +1,5 @@
 -- Index bloat with WITH clause 9.3    
+-- This query gives information about the bloating on individual indexes. 
 WITH index_bloat AS (
     SELECT
         current_database(), schemaname, tablename, 
