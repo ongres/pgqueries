@@ -1,6 +1,7 @@
 -- WARNING: executed with a non-superuser role, the query inspect only index on tables you are granted to read.
 -- WARNING: rows with is_na = 't' are known to have bad statistics ("name" type is not supported).
 -- This query is compatible with PostgreSQL 8.2 and after
+-- This query provides how bloated are only the  btree indexes with individual information on each index
 SELECT current_database(), nspname AS schemaname, tblname, idxname, bs*(relpages)::bigint AS real_size,
   bs*(relpages-est_pages)::bigint AS extra_size,
   100 * (relpages-est_pages)::float / relpages AS extra_ratio,
