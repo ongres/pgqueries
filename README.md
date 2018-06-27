@@ -31,7 +31,8 @@ Also we recommend to use https://swtch.com/~rsc/regexp/regexp4.html (Google's co
 [codesearch](https://github.com/google/codesearch)
 
 ```
-export CSEARCHINDEX=$HOME/ongres/pgQueriesCollection/index
+cd <this_repo>
+export CSEARCHINDEX=${PWD}/csearchindex
 ./cindex <this_repo>/sql
 ./csearch <expression>
 ```

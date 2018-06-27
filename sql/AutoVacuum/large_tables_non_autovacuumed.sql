@@ -10,4 +10,4 @@ autovacuum_count,
 -- analyze_count,
 autoanalyze_count 
 from pg_stat_user_tables
- order by pg_relation_size(relid) desc;
+ order by n_dead_tup desc, pg_relation_size(relid) desc;

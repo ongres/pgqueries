@@ -19,6 +19,7 @@ LEFT JOIN pg_namespace N ON (N.oid = C.relnamespace)
 , pg_settings st
 WHERE 
     schemaname NOT IN ('information_schema','pg_catalog')
+    -- AND tablename IN ('','')
 and st.name = 'default_statistics_target'
 and N.nspname = ps.schemaname
 )
