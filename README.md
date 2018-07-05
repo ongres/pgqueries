@@ -2,6 +2,17 @@
 
 This repository only contains SQLs and Procedural Language hacks. Is not intended to use for executing to a server from the repository itself, instead is a way for finding useful queries for getting information from the database.
 
+## Configure csearch
+
+1. Install csearchindex (see [bellow](Searching)) 
+2. Change directory to current and issue:
+
+```sh
+source env
+```
+
+
+
 ## Organization and formats
 
 - use .sql for SQLs and Procedural Languages.
