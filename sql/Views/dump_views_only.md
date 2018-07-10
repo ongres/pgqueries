@@ -1,6 +1,6 @@
 # Dump Views Only
 
-```
+```bash
 time pg_dump --disable-triggers --no-privileges -c  <PASTE HERE THE QUERY OUTPUT> YOURDB | psql -h thehost  -U <user> <database> 2>&1 | tee restore_views.log
 ```
 
