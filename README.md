@@ -2,21 +2,10 @@
 
 This repository only contains SQLs and Procedural Language hacks. Is not intended to use for executing to a server from the repository itself, instead is a way for finding useful queries for getting information from the database.
 
-## Configure csearch
-
-1. Install csearchindex (see [bellow](Searching)) 
-2. Change directory to current and issue:
-
-```sh
-source env
-```
-
-
-
 ## Organization and formats
 
 - use .sql for SQLs and Procedural Languages.
-- use .md within the same file name as the .sql if you want to include documentation
+- use .md within the same file name as the .sql if you want to include documentation of the query and its contents.
 
 when you add a .sql, please add a line like the bellow:
 
@@ -27,16 +16,17 @@ when you add a .sql, please add a line like the bellow:
 Version isn't mandatory, although we'll make sure that all sqls have a small comment like this.
 The more the comments, the better.
 
-
-
 ## Searching
 
-Config file attached for using with [Hound](https://github.com/etsy/hound). Easiest way to get this working is via Docker:
+### Hound
 
+Config file attached for using with [Hound](https://github.com/etsy/hound). Easiest way to get this working is via Docker:
 
 ```bash
 docker run -d -p 6080:6080 --name hound -v $(pwd):/data etsy/hound
 ```
+
+### Codesearch
 
 Also we recommend to use https://swtch.com/~rsc/regexp/regexp4.html (Google's codesearch)
 [codesearch](https://github.com/google/codesearch)
@@ -49,6 +39,12 @@ export CSEARCHINDEX=${PWD}/csearchindex
 ```
 
 Requires build, but otherwise works like a charm.
+
+To use it, `cd` to this directory and:
+
+```sh
+source env
+```
 
 
 ## References and other repositories

@@ -15,7 +15,7 @@ ORDER BY c.relname
 -- We array everything cause there could be absent _states_ of the usagecount.
 -- Both ixcount and usagecount are correlative in order, order_by_bufcount is the
 -- one that gives you the order on the amount of buffers per each usagecount.
--- The highed the 5' scored blocks on a relation the beter. Unfortunately there are 
+-- The highed the 5' scored blocks on a relation the better. Unfortunately there are 
 -- many scenarios of when and how the score of blocks can vary, so to give an idea
 -- we ideally need to collect all of this information and aggregate.
 SELECT rel, array_agg(usagecount order by usagecount desc) as ixcount , array_agg(bufcount order by usagecount desc) as usagecount,
