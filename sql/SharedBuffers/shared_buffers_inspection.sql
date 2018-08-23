@@ -11,8 +11,10 @@ SELECT  c.relname as rel, count(*) AS buffers,
              GROUP BY c.relname
              ORDER BY 2 DESC
              LIMIT 20
-)
-SELECT rel, buffers, (buffers * 8) /1024 as size_MB, score,  dirtpages, pinbackend
+) -- returns the most populated relations in SB in that order
+SELECT rel, buffers, (buffers * 8) /1024 as size_MB, 
+        score,  dirtpages, pinbackend,
+        round(100*(dirtpages)/buffers) as dirt_perc
 from bufs
 ;
 
