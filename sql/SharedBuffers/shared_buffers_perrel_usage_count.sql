@@ -3,12 +3,13 @@
 -- lead if we run short of shared_buffers.
 -- set session statement_timeout='45s'; 
 WITH viewbuf AS (
-select c.relname as rel, usagecount, count(*) as bufcount
+select c.relname as rel, usagecount, count(*) as bufcount,
+    pg_size_pretty(pg_relation_size(c.oid)) as relation_size
 FROM pg_buffercache b INNER JOIN pg_class c
              ON b.relfilenode = pg_relation_filenode(c.oid) AND
                 b.reldatabase IN (0, (SELECT oid FROM pg_database
                                       WHERE datname = current_database()))
-GROUP BY c.relname, usagecount
+GROUP BY c.relname, usagecount, relation_size
 ORDER BY c.relname
 )
 -- Maximum 6 values per array. 
@@ -19,10 +20,10 @@ ORDER BY c.relname
 -- many scenarios of when and how the score of blocks can vary, so to give an idea
 -- we ideally need to collect all of this information and aggregate.
 SELECT rel, array_agg(usagecount order by usagecount desc) as ixcount , array_agg(bufcount order by usagecount desc) as usagecount,
-      array_agg(usagecount order by bufcount desc) as order_by_bufcount
+      array_agg(usagecount order by bufcount desc) as order_by_bufcount, relation_size
 FROM viewbuf
-group by rel
+group by rel, relation_size
 order by usagecount desc
-limit 50;
+limit 20;
 
 
