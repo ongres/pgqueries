@@ -52,6 +52,6 @@ source env
 - https://github.com/NikolayS/postgres_dba/tree/master/sql
 - https://github.com/ioguix/pgsql-bloat-estimation/tree/master/table
 - https://wiki.postgresql.org/wiki/Show_database_bloat
-
+- https://github.com/hvf/franchise
 
 
