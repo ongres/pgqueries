@@ -1,22 +1,29 @@
 ## What is this repository about?
 
-This repository only contains SQLs and Procedural Language hacks. Is not intended to use for executing to a server from the repository itself, instead is a way for finding useful queries for getting information from the database.
+This repository only contains SQLs and Procedural Language hacks. Is not intended to use for 
+executing to a server from the repository itself, instead is a way for finding useful queries 
+for getting information from the database.
 
 ## Organization and formats
 
-- use .sql for SQLs and Procedural Languages.
-- use .md within the same file name as the .sql if you want to include documentation of the query and its contents.
+- use `.sql` for SQLs and Procedural Languages.
+- use `.md` within the same file name as the .sql if you want to include documentation of the query and its contents.
 
-when you add a .sql, please add a line like the bellow:
+When you add a `.sql`, please add a line like the bellow at the top:
 
 ```
 -- This query does THIS. 9.0
+-- Optional comments explaining what this does and what it shouldn't
 ```
 
 Version isn't mandatory, although we'll make sure that all sqls have a small comment like this.
 The more the comments, the better.
 
 ## Searching
+
+### Le ol' `git grep`
+
+Use `git grep <pattern>` for searching in th repo.
 
 ### Hound
 
