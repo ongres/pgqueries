@@ -19,6 +19,32 @@ When you add a `.sql`, please add a line like the bellow at the top:
 Version isn't mandatory, although we'll make sure that all sqls have a small comment like this.
 The more the comments, the better.
 
+
+## SQL formatting and practices
+
+Rule 1:
+
+> Try to make backward compatible queries or even better, provide different queries per version.
+> eg. Queries using advanced properties of CTE or recursive, LATERAL, FDW, etc can be used, but
+> try to provide their version for older versions or at least add them in the TODO.md
+
+Rule 2: 
+
+> First comment line is mandatory. Minimal accepted documentation.
+
+## Testing
+
+TODO
+
+(We do have an easy way to spin up docker images from all available versions and trigger queries
+against them). Probably we can reuse postgresqlco.nf infrastructure for this.
+
+
+## Resources
+
+[SQL tricks for Postgres/PostGIS](https://abelvm.github.io/sql/sql-tricks/) 
+
+
 ## Searching
 
 ### Le ol' `git grep`

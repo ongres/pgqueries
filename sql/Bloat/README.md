@@ -1,5 +1,10 @@
+## About Bloat
 
-Source: https://github.com/ioguix/pgsql-bloat-estimation
+This has been forked from [ioguix's pgsql bloat estimation](https://github.com/ioguix/pgsql-bloat-estimation),
+although some additions and modifications has been made. 
+
+
+## Original Doc (requires update)
 
 Queries to mesure statistical bloat in btree indexes and tables for PostgreSQL.
 

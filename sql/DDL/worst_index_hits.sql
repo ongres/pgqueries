@@ -1,10 +1,5 @@
 -- The hit vs read ratio. The closest to 1, the better.
--- Sometimes can be negative when an index has been read in memory once A
--- and only a few hits received. This is the worst case, but we need to track as it
--- can be a new index.
--- This is ordered from the worst to the best cases, as we don't care about does indexes
--- with an optimal hit ratio (harcoded to > 0.95). Also we discard indexes that have a high usage 
--- in this query, as we want to track the worst performing indexes.  
+
 
 WITH worst_index_hit_ratio AS (
 	SELECT

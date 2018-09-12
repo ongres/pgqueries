@@ -1,4 +1,4 @@
--- Get summarized sdirty rows overall
+-- Get summarized _all the database_ dirty rows overall
 
 SELECT sum(n_live_tup) as Total_Live_rows, sum(n_dead_tup) as Total_Dead_Rows,
             round(sum(n_dead_tup)*100/nullif(sum(n_live_tup),0),2) as Percentage_of_Dead_Rows,
