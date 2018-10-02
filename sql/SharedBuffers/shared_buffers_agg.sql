@@ -6,5 +6,5 @@ WITH agg AS (
        sum(pinning_backends) as pinned_backends
     FROM pg_buffercache
 )
-SELECT *, round((100*dirty_buffers)/buffer_count,20) as dirt_perc 
+SELECT *, round(((100*dirty_buffers::double precision)/buffer_count::double precision)::numeric,2)  as dirt_perc 
 FROM agg;
