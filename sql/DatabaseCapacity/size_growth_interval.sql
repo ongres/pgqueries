@@ -2,9 +2,16 @@
 -- Increase pg_sleep accordingly
 
 WITH timeset AS (
-select pg_database_size(datname) num, pg_size_pretty(pg_database_size(datname)) size from pg_database where datname = 'db'
+select pg_database_size(datname) num, 
+    pg_size_pretty(pg_database_size(datname)) size 
+    from pg_database where datname = 'db'
 UNION ALL
-select pg_database_size(datname) num, pg_size_pretty(pg_database_size(datname)) size from pg_database, pg_sleep(10) where datname = 'db' 
+select pg_database_size(datname) num, 
+    pg_size_pretty(pg_database_size(datname)) size 
+    from pg_database, pg_sleep(10) where datname = 'db' 
 )
-SELECT num - lag(num,1) OVER (ORDER BY num) bytes_per_10_second, size  FROM timeset
+SELECT pg_size_pretty((num - lag(num,1) 
+            OVER (ORDER BY num))/10) transfer_per_second, 
+        size  
+    FROM timeset
 ; 
