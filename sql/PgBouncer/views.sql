@@ -1,3 +1,5 @@
+-- PgBouncer views for extracting pgbouncer stats programmatically
+
 CREATE EXTENSION IF NOT EXISTS dblink;
 
 CREATE SERVER pgbouncerLocal 
