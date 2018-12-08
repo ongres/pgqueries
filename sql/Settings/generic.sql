@@ -8,4 +8,4 @@ FROM pg_settings
 WHERE 
     category ~ '^Replication'
     -- category ~ 'eplication'
-ORDER BY context
+ORDER BY context;
