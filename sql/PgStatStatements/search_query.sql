@@ -14,6 +14,8 @@ SELECT queryid,
       WHEN (shared_blks_written > 0) THEN round(shared_blks_written / calls )
       ELSE 0 END as blk_wrtn_per_call
 FROM pg_stat_statements
-WHERE query ~ 'SELECT DISTINCT ON'
+WHERE 
+--query ~ 'SELECT DISTINCT ON'
+query ~* 'ILIKE'
 ORDER BY total_time/calls DESC
 LIMIT 10;
