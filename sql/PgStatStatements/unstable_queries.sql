@@ -1,5 +1,4 @@
---
---
+-- Unstable queries, with larges deltas.
 
 SELECT queryid, calls,mean_time, max_time, query, 
   rows, shared_blks_read, 

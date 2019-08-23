@@ -1,4 +1,4 @@
--- slowest query
+-- Hunting queries with pattern
 SELECT queryid,
     query,
     calls,
