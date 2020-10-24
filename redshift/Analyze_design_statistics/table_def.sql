@@ -1,0 +1,2 @@
+-- Version:  PostgreSQL 8.0.2 on i686-pc-linux-gnu, compiled by GCC gcc (GCC) 3.4.2 20041017 (Red Hat 3.4.2-6.fc3), Redshift 1.0.19884
+select * from pg_table_def where schemaname not in  ('pg_catalog');
