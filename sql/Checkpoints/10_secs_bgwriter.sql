@@ -1,4 +1,4 @@
--- Get 10s statistic from pg_stat_bgwriter
+
 WITH tara AS (
   SELECT 
     checkpoints_timed     ,
@@ -11,20 +11,7 @@ WITH tara AS (
     buffers_backend       ,
     buffers_backend_fsync ,
     buffers_alloc         
-    from pg_stat_bgwriter
-UNION ALL
-select 
-    0,
-0,
-0,
-0,
-0,
-0,
-0,
-0,
-0,
-0
-    from pg_sleep(10) 
+    from pg_stat_bgwriter, pg_sleep(10)
 )
 SELECT 
     pgb.checkpoints_timed     - tara.checkpoints_timed,
