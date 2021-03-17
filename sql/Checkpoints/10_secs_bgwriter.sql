@@ -14,16 +14,16 @@ WITH tara AS (
     from pg_stat_bgwriter
 UNION ALL
 select 
-    NULL,
-NULL,
-NULL,
-NULL,
-NULL,
-NULL,
-NULL,
-NULL,
-NULL,
-NULL
+    0,
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+0,
+0
     from pg_sleep(10) 
 )
 SELECT 
