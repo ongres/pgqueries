@@ -1,4 +1,3 @@
-
 -- Get the tables from a query.
 create or replace function get_query_tables(p_query text) returns text[] language plpgsql as $$
 declare
