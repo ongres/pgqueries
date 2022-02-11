@@ -1,7 +1,13 @@
-# Some insights on buffercache 
+# Shared Buffer Inspection
 
-There is a misterious usagecount column in the pg_buffercache does have the 
-not so explicit description of "Clock-sweep access count". What this means is that
+## pgbuffercache
+
+> Beware using this extension during concurrency peaks, as a LWLock is issued to have a consistent view of the shared space.
+
+
+## The usage count internals
+
+Each block has a "Clock-sweep access count" score from 0 to 5. What this means is that
 the usage count is the current _score_ of backends pinning that buffer going from 0 (
 dirtied or non used atm) to 5 (meaning 5 or more backends are accessing now, with
 no strategy set). The clock-seep algorithm is explained in detail at `src/backend/storage/buffer/README`.
@@ -20,8 +26,7 @@ no strategy set). The clock-seep algorithm is explained in detail at `src/backen
 ```
 
 
-
-We can think on this value as an score, and can give us the idea of its _heat-state_.
+It can give the perspective of the block's _heat-state_.
 Each time a backend _pins_ a buffer, it increases by `buf_state += BUF_USAGECOUNT_ONE;`
 (bufmgr.c, BUF_USAGECOUNT_ONE is constant 1 ) and decreases through `UnpinBuffer` (bufmgr.c) function
 within the same constant step.
@@ -32,7 +37,6 @@ favoritism.
 If a page is used, its minimum is 1 (ring securing), leaving it at 0 when unpinning. A usagecount buffer
 0 means it is dirty or it is not being used.
 
-A LWLock is issued to have a consistent view so beware on executing this during high peaks of concurrency.
 
 ```
 //buf_internals.h
@@ -46,4 +50,6 @@ A LWLock is issued to have a consistent view so beware on executing this during 
  */
 #define BM_MAX_USAGE_COUNT	5
 ```
+
+The Clock-sweep is a 256k buffer ring designed to fit in L3 cache in a single instruction. To be processed by the CPU, blocks have to be pinned.
 
