@@ -18,5 +18,6 @@ WITH active_backends as (
 )
 SELECT  count(*),
         sum(CASE WHEN backend_xmin > oldest_xmin THEN   1  ELSE  0  END ),
-        max(extract ('epoch' from (clock_timestamp() - xact_start)))
+        max(extract ('epoch' from (clock_timestamp() - xact_start))),
+        stddev(extract ('epoch' from (clock_timestamp() - xact_start)))
 FROM active_backends
