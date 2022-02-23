@@ -35,7 +35,11 @@ SELECT rel, buffers,
         -- The reason of so large rounding threshold is because large tables might
         -- bias the result. This returns the percentage of the relation allocated in the shared buffers
         -- FIXME: Probably a logaritmic could help to identify hot page chunks.
-        round(((100*buffers::double precision)/relpages::double precision)::numeric,8) as alloc_rel_perc,
+        CASE 
+        WHEN relpages<>0 THEN
+        round(((100*buffers::double precision)/relpages::double precision)::numeric,8) 
+        ELSE 0
+        END as alloc_rel_perc,
         -- The percentage of shared buffers allocated by the table
         round(((100*buffers::double precision)/s.setting::double precision)::numeric,8) as perc_alloc_in_sb,
         -- The total amount of allocated buffers in megabytes
@@ -45,4 +49,3 @@ SELECT rel, buffers,
 
 from bufs b, _settings s
 ;
-
