@@ -1,7 +1,4 @@
-/*
-If we cant' run VACUUM FREEZE in the whole database so we can check the TOP100 individual relations candidates to run it
-
-*/
+-- If we cant' run VACUUM FREEZE in the whole database so we can check the TOP100 individual relations candidates to run it
 
 WITH per_table_stats AS (
   SELECT
@@ -29,16 +26,3 @@ FROM
 LIMIT
   100;
 
-
-/*
-                   relation         | oldest_current_xid | autovacuum_freeze_max_age | percent_towards_emergency_autovacuum |    size    
-------------------------------------+--------------------+---------------------------+--------------------------------------+------------
- table1                             |          185106698 |                 200000000 |                                   99 | 32 MB
- table2                             |          185106698 |                 200000000 |                                   99 | 56 kB
- table3                             |          185106698 |                 200000000 |                                   93 | 184 kB
- table4l                            |          185106698 |                 200000000 |                                   93 | 64 kB
- tablex                             |          185106698 |                 200000000 |                                   93 | 64 kB
- tablep                             |          185106698 |                 200000000 |                                   93 | 48 kB
-
-
-*/
