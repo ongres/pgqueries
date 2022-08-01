@@ -1,4 +1,4 @@
-
+-- 10 second iteration for calculate bgwriter activity
 WITH tara AS (
   SELECT 
     checkpoints_timed     ,
