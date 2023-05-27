@@ -24,6 +24,13 @@ When you add a `.sql`, please add a line like the bellow at the top:
 Version isn't mandatory, although we'll make sure that all sqls have a small comment like this.
 The more the comments, the better.
 
+The hierarchical tree is compound by:
+
+```
+sql/<category>/file.[sql|md]
+```
+
+
 
 ## SQL formatting and practices
 
@@ -51,43 +58,6 @@ Something like [egres QA](https://gitlab.com/ongresinc/devel/egres/egres_qa/tree
 
 [SQL tricks for Postgres/PostGIS](https://abelvm.github.io/sql/sql-tricks/) 
 
-
-## Searching
-
-`git grep` is the recommended, although as we expect this to grow considerably,
-we offer a few other solutions that can speed up or improve searching.
-
-### Le ol' `git grep`
-
-Use `git grep <pattern>` for searching in th repo.
-
-### Hound
-
-Config file attached for using with [Hound](https://github.com/etsy/hound). Easiest way to get this working is via Docker:
-
-```bash
-docker run -d -p 6080:6080 --name hound -v $(pwd):/data etsy/hound
-```
-
-### Codesearch
-
-Also we recommend to use https://swtch.com/~rsc/regexp/regexp4.html (Google's codesearch)
-[codesearch](https://github.com/google/codesearch)
-
-```
-cd <this_repo>
-export CSEARCHINDEX=${PWD}/csearchindex
-./cindex <this_repo>/sql
-./csearch <expression>
-```
-
-Requires build, but otherwise works like a charm.
-
-To use it, `cd` to this directory and:
-
-```sh
-source env
-```
 
 
 ## References and other repositories
