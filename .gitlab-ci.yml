@@ -1,0 +1,11 @@
+# Example in https://gitlab.com/gitlab-org/gitlab/-/blob/master/lib/gitlab/ci/templates/Python.gitlab-ci.yml?_gl=1%2a13lsqrx%2a_ga%2aMTMwNDE3NjM0Ny4xNjMxNTUzNTY0%2a_ga_ENFH3X7M5Y%2aMTY4NTM1ODg2Ni45MC4wLjE2ODUzNTg4NjYuMC4wLjA.
+image: python:latest
+
+run:
+  script:
+    - python3 artifact_builder -D sql -O index.json
+  artifacts:
+    paths:
+      - index.json
+  rules:
+    - if: $CI_COMMIT_BRANCH == "master"
