@@ -1,0 +1,86 @@
+## WIP: This docker compose does not have any impact on the builder yet.
+version: '3'
+
+services:
+  postgres10:
+    image: postgres:10
+    container_name: postgres10
+    ports:
+      - 15010:5432
+    networks:
+      - pgqueries
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  postgres11:
+    image: postgres:11
+    container_name: postgres11
+    ports:
+      - 15011:5432
+    networks:
+      - pgqueries
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  postgres12:
+    image: postgres:12
+    container_name: postgres12
+    ports:
+      - 15012:5432
+    networks:
+      - pgqueries
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  postgres13:
+    image: postgres:13
+    container_name: postgres13
+    ports:
+      - 15013:5432
+    networks:
+      - pgqueries
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  postgres14:
+    image: postgres:14
+    container_name: postgres14
+    ports:
+      - 15014:5432
+    networks:
+      - pgqueries
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  postgres15:
+    image: postgres:15
+    container_name: postgres15
+    ports:
+      - 15015:5432
+    networks:
+      - pgqueries
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+
+  artifact_builder:
+    build:
+      context: artifact_builder/
+    container_name: artifact_builder
+    ## TODO: once testing queries is done in artifacts_builder,
+    ## we'll proceed to make this dependant of the postgresN
+    # depends_on:
+    #   - postgres10
+    #   - postgres11
+    #   - postgres12
+    #   - postgres13
+    #   - postgres14
+    #   - postgres15
+      
+networks:
+  pgqueries:
