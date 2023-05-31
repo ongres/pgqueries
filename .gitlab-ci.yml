@@ -7,7 +7,7 @@ default:
   only:
     - master
 
-run:
+release:
   script:
     - python3 artifact_builder -D sql -O index.json
   artifacts:
