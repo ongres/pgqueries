@@ -1,0 +1,69 @@
+name: artifacts release 
+
+on: 
+  push:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo content
+        uses: actions/checkout@v2 # checkout the repository content
+
+      - name: setup python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10' # install the python version needed
+  
+      - name: install python packages
+        run: |
+          cd artifact_builder
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+  
+      - name: execute artifact_builder
+        run: python artifact_builder -D sql -O index.json
+
+      - name: Extract tag name
+        id: tag
+        uses: actions/github-script@0.2.0
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            return context.payload.ref.replace(/\/refs\/tags\//, '');
+
+    ## In the future, we may want to release on main branch
+    ## and place the version in a file, so it automatically
+    ## creates the release and tag.
+    # - name: version
+    #   run: echo "::set-output name=version::$(./bin/azblogfilter --version)"
+    #   id: tag
+    #   - name: release
+    #     uses: actions/create-release@v1
+    #     id: create_release
+    #     with:
+    #       draft: false
+    #       prerelease: false
+    #       release_name: ${{ steps.tag.outputs.version }}
+    #       tag_name: ${{ github.ref }}
+    #       body_path: CHANGELOG.md
+    #     env:
+    #       GITHUB_TOKEN: ${{ github.token }}
+
+      - name: Gets the latest created release info
+        id: latest_release_info
+        uses: jossef/action-latest-release-info@v1.2.1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+
+      - name: upload artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.latest_release_info.outputs.upload_url }}
+          asset_path: index.json
+          asset_name: index.json
+          asset_content_type: application/json
