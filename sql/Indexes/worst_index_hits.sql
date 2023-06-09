@@ -16,5 +16,8 @@ WITH worst_index_hit_ratio AS (
   GROUP BY indexrelname, relid
   ORDER BY hit_ratio ASC
 )
-SELECT * FROM worst_index_hit_ratio WHERE idx_read = 0 and idx_hit = 0; --  < 0.9;
+SELECT * FROM worst_index_hit_ratio 
+  WHERE 
+    -- idx_read = 0 and idx_hit = 0; --  < 0.9;
+    hit_ratio < 0.8;
 

@@ -2,8 +2,8 @@
 SELECT queryid,
     query,
     calls,
-    total_time/1000 as time_secs,
-    (total_time/1000)/calls as per_call,
+    total_exec_time/1000 as time_secs,
+    (total_exec_time/1000)/calls as per_call,
     CASE
       WHEN (shared_blks_hit > 0 AND shared_blks_read > 0) THEN round(shared_blks_hit / (shared_blks_hit + shared_blks_read)) 
       ELSE 0 END as hit_ratio,
@@ -14,5 +14,5 @@ SELECT queryid,
       WHEN (shared_blks_written > 0) THEN round(shared_blks_written / calls )
       ELSE 0 END as blk_wrtn_per_call
 FROM pg_stat_statements
-ORDER BY total_time/calls DESC
+ORDER BY total_exec_time/calls DESC
 LIMIT 10;

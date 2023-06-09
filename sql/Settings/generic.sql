@@ -1,4 +1,5 @@
 -- Get a better output of pg_settings
+/*
 SELECT name, category,
         setting,
         short_desc::text , extra_desc::text, 
@@ -9,3 +10,6 @@ WHERE
     category ~ '^Replication'
     -- category ~ 'eplication'
 ORDER BY context;
+*/
+SELECT *
+FROM pg_settings;

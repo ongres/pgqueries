@@ -18,3 +18,6 @@ On `percent_towards_emergency_autovacuum` in 100%, autovacuum will run in aggres
 but also, will force a block read to disk.
 
 The sizes are useful for estimate how long the execution will take, but this is also relative to the concurrency, indexes and other factors.
+
+The default value is too conservative, (10%) probably you can set autovacuum_freeze_max_age for this table in a higer value (~25%).
+https://postgresqlco.nf/doc/en/param/autovacuum_freeze_max_age/13/
