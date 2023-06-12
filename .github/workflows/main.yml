@@ -24,5 +24,5 @@ jobs:
           pip install -r requirements.txt
   
       - name: execute artifact_builder 
-        run: python artifact_builder -D sql -O index.json
+        run: python artifact_builder -D sql -O index.json -E postgres
       

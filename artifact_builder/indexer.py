@@ -16,15 +16,18 @@ def indexDir(sqlDirectory: str, _engine: str) -> fileMap:
             key = sub('.sql|.md', '', filename)
             fpath = join(root.removeprefix('../'), filename)
 
-            if key not in _fileMap:
+            # For now, we ignore READMEs. But, we might furtherly include some documentation
+            # artifact.
+            if key not in _fileMap and filename.removesuffix(".md").lower() != 'readme':
                 _fileMap[key]={'engine': _engine}
+                _fileMap[key]={'title': sub('[_-]'," ", str(key)).capitalize()}
             
             if filename.endswith(".sql"):
                 with open(fpath, encoding="utf-8") as f:
                     _fileMap[key].update({'fpath': fpath, 
-                                        'category': root.removeprefix(sqlDirectory),
+                                        'category': root.removeprefix(sqlDirectory + '/'),
                                         'query': f.read()})
-            elif filename.endswith(".md"):
+            elif filename.endswith(".md") and filename.removesuffix(".md").lower() != 'readme':
                 with open(fpath, encoding="utf-8") as f:
                     _fileMap[key].update({'docFPath': fpath,
                                           'doc': f.read()})
