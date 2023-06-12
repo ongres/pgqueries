@@ -51,4 +51,4 @@ from tree
 left join pairs w on w.waiter = tree.pid and w.locker = tree.dad
 join pg_stat_activity a using (pid)
 join pg_stat_activity r on r.pid=tree.root
-order by (now() - r.xact_start), path;
+order by (clock_timestamp() - r.xact_start), path;

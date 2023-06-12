@@ -1,9 +1,9 @@
 -- Get activity and lock state
-SELECT (now() - a.query_start) > '00:01:00'::interval AS long_tx,
+SELECT (clock_timestamp() - a.query_start) > '00:01:00'::interval AS long_tx,
    a.pid,
    u.usename AS username,
    a.wait_event_type,
-   now() - a.query_start AS "time",
+   clock_timestamp() - a.query_start AS "time",
    kl.pid AS b_pid,
    a.state,
    a.query

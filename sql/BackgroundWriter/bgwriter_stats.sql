@@ -10,8 +10,8 @@ SELECT
    CASE WHEN checkpoints_timed+checkpoints_req>0 THEN round((checkpoint_write_time/checkpoints_timed+checkpoints_req)/1000) ELSE 0 END  as per_chkpt_seconds,
    buffers_alloc,
    stats_reset::timestamp(0),
-   CASE WHEN date_part('day',(now() - stats_reset)::interval) > 0  THEN round(checkpoints_req + checkpoints_timed / (date_part('day',(now() - stats_reset)::interval))) ELSE 0 END  as chks_per_day,
-   CASE WHEN date_part('day',(now() - stats_reset)::interval) > 0  THEN round(checkpoints_req / (date_part('day',(now() - stats_reset)::interval))) ELSE 0 END  as chk_req_per_day
+   CASE WHEN date_part('day',(clock_timestamp() - stats_reset)::interval) > 0  THEN round(checkpoints_req + checkpoints_timed / (date_part('day',(clock_timestamp() - stats_reset)::interval))) ELSE 0 END  as chks_per_day,
+   CASE WHEN date_part('day',(clock_timestamp() - stats_reset)::interval) > 0  THEN round(checkpoints_req / (date_part('day',(clock_timestamp() - stats_reset)::interval))) ELSE 0 END  as chk_req_per_day
 FROM
   pg_stat_bgwriter;
 

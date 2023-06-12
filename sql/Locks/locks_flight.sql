@@ -6,7 +6,7 @@ SELECT
   array_agg( distinct pg_blocking_pids(pid)) as "BlockingPids",
   count(pl.*) as "NumLocks",
   array_agg( pl.mode) as "Modes",
-  now() - xact_start  as "Running time"
+  clock_timestamp() - xact_start  as "Running time"
 FROM pg_stat_activity pa join pg_locks pl using (pid)
 WHERE application_name ~ 'sidekiq'
   and wait_event IS NOT NULL

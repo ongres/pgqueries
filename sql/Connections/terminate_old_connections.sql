@@ -25,12 +25,12 @@ as $$
     datname,
     usename,
     state,
-    age(now(), query_start),
-    age(now(), state_change),
+    age(clock_timestamp(), query_start),
+    age(clock_timestamp(), state_change),
     pg_terminate_backend(pid)
   from pg_stat_activity
   where
-    state_change < now() - age_minutes * interval '1 minute'
+    state_change < clock_timestamp() - age_minutes * interval '1 minute'
     and (any_status or state = 'idle')
   order by state_change;
 $$ language sql;
