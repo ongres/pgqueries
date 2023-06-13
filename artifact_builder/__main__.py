@@ -3,7 +3,8 @@ from filemap import fileMap
 import json 
 import ndjson
 import argparse
-
+from re import sub, escape, MULTILINE
+from os import remove
 
 sqlDirectory = "../sql/"
 global _engine
@@ -30,10 +31,22 @@ def main():
     with open(args.output, 'rb') as f:
         data = json.load(f)
 
-    with open(args.output_ndjson, 'w+', encoding='utf-8-sig') as f:
+    """
+    Next blocks are doing a nasty thing. They dump into a temporal file the contents of 
+    the data dictionary for escaping the escape character later. This generates an ndjson 
+    compatible with Postgres COPY.
+    """
+    with open(args.output_ndjson + '.temp', 'w+', encoding='utf-8-sig') as f:
         writer = ndjson.writer(f)
         for key in data:
             writer.writerow(data[key])
+
+    with open(args.output_ndjson, 'w+', encoding='utf-8-sig') as f:
+        input = open(args.output_ndjson + '.temp')
+        f.write(sub(r'\\',r'\\\\',input.read()))
+        input.close()
+
+    remove(args.output_ndjson + '.temp')
 
 if __name__ == "__main__":
     main()
