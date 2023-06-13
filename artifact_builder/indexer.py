@@ -18,7 +18,7 @@ def indexDir(sqlDirectory: str, _engine: str) -> fileMap:
 
             # For now, we ignore READMEs. But, we might furtherly include some documentation
             # artifact.
-            if key not in _fileMap and filename.removesuffix(".md").lower() != 'readme':
+            if key not in _fileMap and filename.removesuffix(".md").lower() not in ('readme', '.gitkeep'):
                 _fileMap[key]={'engine': _engine}
                 _fileMap[key]={'title': sub('[_-]'," ", str(key)).capitalize()}
             
