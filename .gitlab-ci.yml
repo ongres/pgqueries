@@ -3,16 +3,17 @@ image: python:latest
 
 default:
   script:
-    - python3 artifact_builder -D sql -O index.json
+    - python3 artifact_builder -D sql -O index.json -E postgres
   only:
     - master
 
 release:
   script:
-    - python3 artifact_builder -D sql -O index.json
+    - python3 artifact_builder -D sql -O index.json -E postgres
   artifacts:
     paths:
       - index.json
+      - ndindex.json
   # rules:
   #   - if: $CI_COMMIT_BRANCH == "master"
   only:

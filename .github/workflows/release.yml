@@ -24,7 +24,7 @@ jobs:
           pip install -r requirements.txt
   
       - name: execute artifact_builder
-        run: python artifact_builder -D sql -O index.json
+        run: python artifact_builder -D sql -O index.json -E postgres
 
       - name: Extract tag name
         id: tag
@@ -66,4 +66,14 @@ jobs:
           upload_url: ${{ steps.latest_release_info.outputs.upload_url }}
           asset_path: index.json
           asset_name: index.json
+          asset_content_type: application/json
+
+      - name: upload ndjson artifact
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        with:
+          upload_url: ${{ steps.latest_release_info.outputs.upload_url }}
+          asset_path: ndindex.json
+          asset_name: ndindex.json
           asset_content_type: application/json
