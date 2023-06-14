@@ -30,8 +30,6 @@ The hierarchical tree is compound by:
 sql/<category>/file.[sql|md]
 ```
 
-
-
 ## SQL formatting and practices
 
 Rule 1:
@@ -43,6 +41,13 @@ Rule 1:
 Rule 2: 
 
 > First comment line is mandatory. Minimal accepted documentation.
+
+## Indexer
+
+> This is currently under development.
+
+This repository includes and indexer tool (artifact_builder) that builds json artifacts to be 
+easily imported into Postgres using NDJSON format. 
 
 ## Testing
 
