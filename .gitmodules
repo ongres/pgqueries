@@ -1,0 +1,3 @@
+[submodule "artifact_builder"]
+	path = artifact_builder
+	url = git@github.com:viadb/artifact_builder.git

@@ -10,8 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout repo content
-        uses: actions/checkout@v2 
-
+        uses: actions/checkout@v3
+        with:
+          submodules: recursive 
+      - name: Git Submodule Update
+        run: |
+          git submodule update --remote --recursive
+      
       - name: setup python
         uses: actions/setup-python@v4
         with:
