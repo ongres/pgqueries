@@ -21,3 +21,4 @@ pip-selfcheck.json
 .artifacts/
 index.json
 ndindex.json
+.psqlrc
