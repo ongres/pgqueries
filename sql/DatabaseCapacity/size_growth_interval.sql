@@ -8,10 +8,10 @@ select pg_database_size(datname) num,
 UNION ALL
 select pg_database_size(datname) num, 
     pg_size_pretty(pg_database_size(datname)) size 
-    from pg_database, pg_sleep(10) where datname = current_database()
+    from pg_database, pg_sleep(60) where datname = current_database()
 )
 SELECT pg_size_pretty((num - lag(num,1) 
-            OVER (ORDER BY num))/10) transfer_per_second, 
+            OVER (ORDER BY num))/60) transfer_per_minute, 
         size  
     FROM timeset
 ; 
