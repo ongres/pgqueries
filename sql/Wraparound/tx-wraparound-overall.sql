@@ -3,7 +3,6 @@ Shows the percentage towards Wraparound and Emergency Autovacuum (it can be adde
 for the entire cluster
 */
 
-
 WITH max_age AS ( 
   SELECT
     2000000000 AS max_old_xid, -- two billions
