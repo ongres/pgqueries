@@ -12,6 +12,7 @@ WITH per_table_stats AS (
   WHERE
     relkind IN ('r', 't', 'm') 
     AND n.nspname NOT IN ('pg_toast')
+    and pg_total_relation_size(c.oid) > 1000000 /* Skip small objects */
   ORDER BY 
     oldest_current_xid DESC
 )
