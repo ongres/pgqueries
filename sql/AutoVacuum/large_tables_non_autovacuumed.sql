@@ -1,7 +1,7 @@
 -- Search for very large tables with not enough writes to invoce autovacuum (threshold might be reduced if used ratio) 9.0
 
 select 
-  relname, 
+  schemaname, relname, 
   pg_size_pretty(pg_total_relation_size((schemaname||'.'||relname)::regclass)) as rank_size,
   rank() over ( order by pg_total_relation_size((schemaname||'.'||relname)::regclass) desc), 
   n_dead_tup, 
