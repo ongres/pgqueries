@@ -1,6 +1,6 @@
 -- Search for very large tables with not enough writes to invoce autovacuum (threshold might be reduced if used ratio) 9.0
 
-select 
+select json_agg(t) from (select
   schemaname, relname, 
   pg_size_pretty(pg_total_relation_size((schemaname||'.'||relname)::regclass)) as rank_size,
   rank() over ( order by pg_total_relation_size((schemaname||'.'||relname)::regclass) desc), 
@@ -15,4 +15,4 @@ select
   -- analyze_count,
   autoanalyze_count 
 from pg_stat_user_tables
- order by n_dead_tup desc, pg_relation_size(relid) desc;
+ order by n_dead_tup desc, pg_relation_size(relid) desc) t;
