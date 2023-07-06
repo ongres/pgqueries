@@ -49,6 +49,10 @@ Rule 2:
 This repository includes and indexer tool (artifact_builder) that builds json artifacts to be 
 easily imported into Postgres using NDJSON format. 
 
+It uses submodule, so be careful when testing around.
+
+> General advice, is to run `git submodule update --recursive --remote` whenever new changes are published in artifact_builder.
+
 ## Testing
 
 TODO
