@@ -1,4 +1,4 @@
--- Most active tables. 8.4
+-- Most active tables. +v8.4
 -- Table activity limited to top 10 by size of the table
 -- This query will show the size of the table with/out indexes , how many times was accessed seq/index, and metrics of the several  cache hits of the table(rows, index, pg_toast, index.pg_toast)
 WITH most_active_tables AS (

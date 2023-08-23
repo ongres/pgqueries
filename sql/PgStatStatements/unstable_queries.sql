@@ -1,5 +1,5 @@
 -- Unstable queries, with larges deltas.
-
+-- Uses the standard deviation for calculating the query stability
 SELECT queryid, calls,mean_exec_time, max_exec_time, query, 
   rows, shared_blks_read, 
    

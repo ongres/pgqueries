@@ -15,8 +15,7 @@ SELECT  c.relname as rel,
              ORDER BY 2 DESC
              -- In the case of Productive environments, you can limit the number of relations to reduce the LWLock issuing.
              -- LIMIT 20
-)
-,
+),
 _settings AS (
      -- TODO: We want also to consider wal_buffers, max_connection allocations
      SELECT setting::int 
@@ -47,5 +46,4 @@ SELECT rel, buffers,
         -- The percentage of dirty shared buffers
         sum(  round(((100*dirtypages::double precision)/s.setting::double precision)::numeric,2) ) OVER () as dirty_perc_of_sb
 
-from bufs b, _settings s
-;
+from bufs b, _settings s;
